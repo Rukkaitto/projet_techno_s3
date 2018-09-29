@@ -87,14 +87,25 @@ bool check_right_piece(game g, int x, int y){
 }
 
 game default_game(){
+    piece pieces[] = {  2,0,0,2,0,
+                        3,3,3,3,3,
+                        0,0,3,0,1,
+                        0,3,3,2,1,
+                        0,3,0,0,0};
 
+    direction directions[] = {  W,N,W,N,S,
+                                S,W,N,E,E,
+                                E,N,W,W,W,
+                                S,S,N,W,N,
+                                E,W,S,E,S};
+                                
+
+    return new_game(pieces, directions);
 }
 
 
 int main() {
-    game _game = new_game_empty();
-    set_piece(_game, 4, 4, TEE, S);
-    set_piece(_game,0,1,CORNER,E);
+    game _game = default_game();
     display_game(_game);
     display_game_info(_game);
 }
