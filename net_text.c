@@ -80,11 +80,6 @@ void display_game_info(game g){
     printf("Game dimensions are %dx%d.\n", game_width(g), game_height(g));
 }
 
-bool check_right_piece(game g, int x, int y){
-    piece current_piece = get_piece(g,x,y);
-    piece next_piece = get_piece(g,x+1,y);
-    
-}
 
 game default_game(){
     piece pieces[] = {  2,0,0,2,0,
