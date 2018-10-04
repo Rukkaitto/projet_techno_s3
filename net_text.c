@@ -87,7 +87,7 @@ game default_game(){
                         0,0,3,0,1,
                         0,3,3,2,1,
                         0,3,0,0,0};
-
+    
     direction directions[] = {  W,N,W,N,S,
                                 S,W,N,E,E,
                                 E,N,W,W,W,
@@ -101,6 +101,15 @@ game default_game(){
 
 int main() {
     game _game = default_game();
+    while(!is_game_over(_game)){ //tant que la solution n'est pas trouvée :
+        unsigned int x;
+        unsigned int y;
+        display_game(_game); //afficher la grille
+        scanf("%u %u",&x,&y); //lire un coup sur l'entrée standard : (le format est le suivant : <x> <y>\n )
+        if(x < game_width(_game) && y < game_height(_game)){ //si le coup est valide (les coordonnées sont correctes) alors
+            rotate_piece(_game,x,y,1); //tourner la pièce de coordonnées (x,y) dans le sens horaire
+        }
+    }
     display_game(_game);
-    display_game_info(_game);
+    delete_game(_game);
 }
