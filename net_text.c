@@ -69,7 +69,7 @@ void display_piece(piece p, direction d){
 void display_game(game g){
     int width = game_width(g);
     int height = game_height(g);
-    for(int y = 0; y < height; y++){
+    for(int y = height-1; y >= 0; y--){
         for(int x = 0; x < width; x++){
             display_piece(get_piece(g,x,y), get_current_dir(g,x,y));
         }
@@ -82,17 +82,17 @@ void display_game_info(game g){
 
 
 game default_game(){
-    piece pieces[] = {  2,0,0,2,0,
-                        3,3,3,3,3,
-                        0,0,3,0,1,
+    piece pieces[] = {  0,3,0,0,0,
                         0,3,3,2,1,
-                        0,3,0,0,0};
-    
-    direction directions[] = {  W,N,W,N,S,
-                                S,W,N,E,E,
-                                E,N,W,W,W,
+                        0,0,3,0,1,
+                        3,3,3,3,3,
+                        2,0,0,2,0};
+                
+    direction directions[] = {  E,W,S,E,S,
                                 S,S,N,W,N,
-                                E,W,S,E,S};
+                                E,N,W,W,W,
+                                S,W,N,E,E,
+                                W,N,W,N,S};
                                 
 
     return new_game(pieces, directions);
@@ -107,9 +107,10 @@ int main() {
         display_game(_game); //afficher la grille
         scanf("%u %u",&x,&y); //lire un coup sur l'entrée standard : (le format est le suivant : <x> <y>\n )
         if(x < game_width(_game) && y < game_height(_game)){ //si le coup est valide (les coordonnées sont correctes) alors
-            rotate_piece(_game,x,y,1); //tourner la pièce de coordonnées (x,y) dans le sens horaire
+            rotate_piece_one(_game,x,y); //tourner la pièce de coordonnées (x,y) dans le sens horaire
         }
     }
     display_game(_game);
+    printf("You won !\n");
     delete_game(_game);
 }
