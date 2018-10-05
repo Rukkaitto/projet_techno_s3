@@ -4,72 +4,45 @@
 #include "stdlib.h"
 
 void display_piece(piece p, direction d){
-    if(p==EMPTY){
-        printf("  ");
-    }
-    if(p==LEAF){
-        if(d==N){
-            printf("^ ");
-        }
-        if(d==E){
-            printf("> ");
-        }
-        if(d==W){
-            printf("< ");
-        }
-        if(d==S){
-            printf("v ");
-        }
-        
-    }
-    if(p==SEGMENT){
-        if(d==N){
-            printf("| ");
-        }
-        if(d==E){
-            printf("- ");
-        }
-        if(d==W){
-            printf("- ");
-        }
-        if(d==S){
-            printf("| ");
-        }
-    }
-    if(p==CORNER){
-        if(d==N){
-            printf("└ ");
-        }
-        if(d==E){
-            printf("┌ ");
-        }
-        if(d==W){
-            printf("┘ ");
-        }
-        if(d==S){
-            printf("┐ ");
-        }
-    }
-    if(p==TEE){
-        if(d==N){
-            printf("┴ ");
-        }
-        if(d==E){
-            printf("├ ");
-        }
-        if(d==W){
-            printf("┤ ");
-        }
-        if(d==S){
-            printf("┬ ");
-        }
+    switch(p){
+        case EMPTY: 
+            printf("  ");
+            break;
+        case LEAF: 
+            switch(d){
+                case N: printf("^ "); break;
+                case E: printf("> "); break;
+                case S: printf("v "); break;
+                case W: printf("< "); break;
+            } break;
+        case SEGMENT: 
+            switch(d){
+                case N: printf("| "); break;
+                case E: printf("- "); break;
+                case S: printf("| "); break;
+                case W: printf("- "); break;
+            } break;
+        case CORNER: 
+            switch(d){
+                case N: printf("└ "); break;
+                case E: printf("┌ "); break;
+                case S: printf("┐ "); break;
+                case W: printf("┘ "); break;
+            } break;
+        case TEE: 
+            switch(d){
+                case N: printf("┴ "); break;
+                case E: printf("├ "); break;
+                case S: printf("┬ "); break;
+                case W: printf("┤ "); break;
+            } break;
     }
 }
 
 void display_game(game g){
     int width = game_width(g);
     int height = game_height(g);
-    for(int y = height-1; y >= 0; y--){
+    for(int y = height-1; y >= 0; y--){ //affiche la grille avec une origine (0,0) en bas à gauche
         for(int x = 0; x < width; x++){
             display_piece(get_piece(g,x,y), get_current_dir(g,x,y));
         }
